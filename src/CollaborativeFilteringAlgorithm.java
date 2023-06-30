@@ -1,6 +1,3 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,40 +12,9 @@ public class CollaborativeFilteringAlgorithm {
         ratings = new HashMap<>();
     }
 
-    public void loadMovies(String filePath) {
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            br.readLine(); // Ignorar cabeçalho do arquivo
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",");
-                int movieId = Integer.parseInt(parts[0]);
-                String movieTitle = parts[1];
-                movies.put(movieId, movieTitle);
-            }
-        } catch (IOException e) {
-            System.err.println("Erro ao carregar o arquivo de filmes: " + e.getMessage());
-        }
-    }
-
-    public void loadRatings(String filePath) {
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            br.readLine(); // Ignorar cabeçalho do arquivo
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",");
-                int userId = Integer.parseInt(parts[0]);
-                int movieId = Integer.parseInt(parts[1]);
-                double rating = Double.parseDouble(parts[2]);
-                addRating(userId, movieId, rating);
-            }
-        } catch (IOException e) {
-            System.err.println("Erro ao carregar o arquivo de avaliações: " + e.getMessage());
-        }
-    }
-
-    public void addRating(int userId, int movieId, double rating) {
-        ratings.putIfAbsent(userId, new HashMap<>());
-        ratings.get(userId).put(movieId, rating);
+    public void loadData(String moviesFilePath, String ratingsFilePath) {
+        movies = ReadFile.loadMovies(moviesFilePath);
+        ratings = ReadFile.loadRatings(ratingsFilePath);
     }
 
     public void preprocessData() {

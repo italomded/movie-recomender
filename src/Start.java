@@ -3,10 +3,9 @@ import java.util.Random;
 
 public class Start {
     public static void main(String[] args) throws Exception {
-        CollaborativeFilteringAlgorithm cf = new CollaborativeFilteringAlgorithm();
-        cf.loadMovies("movies.csv");
-        cf.loadRatings("ratings.csv");
-        cf.preprocessData();
+        CollaborativeFilteringAlgorithm algorithm = new CollaborativeFilteringAlgorithm();
+        algorithm.loadData("movies.csv", "ratings.csv");
+        algorithm.preprocessData();
 
         System.out.println("====================================");
         System.out.println("SISTEMA DE RECOMENDAÇÃO DE FILMES");
@@ -21,10 +20,11 @@ public class Start {
         System.out.print("Digite o número máximo de recomendações (n): ");
         int qtd = sc.nextInt();
 
+        System.out.println();
+
         sc.close();
 
-        System.out.println();
-        cf.userBasedCollaborativeFiltering(userId, 5);
-        cf.evaluateRecommendations(userId, rd.nextInt(10), qtd);
+        algorithm.userBasedCollaborativeFiltering(userId, 5);
+        algorithm.evaluateRecommendations(userId, rd.nextInt(10), qtd);
     }
 }
