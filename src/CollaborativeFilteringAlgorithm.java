@@ -148,7 +148,8 @@ public class CollaborativeFilteringAlgorithm {
 
     public void evaluateRecommendations(int userId, int k, int n) {
         List<Integer> recommendedMovies = getTopNRecommendations(userId, k, n);
-        System.out.println("Com base nas preferências do usuário " + userId + " é recomendados os seguintes filmes: ");
+        System.out
+                .println("Com base nas preferências do usuário " + userId + " são recomendados os seguintes filmes: ");
 
         for (int movieId : recommendedMovies) {
             String movieTitle = movies.get(movieId);
